@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student Information</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .alert {
+            font-weight: bold;
+        }
+
+        .form-container {
+            padding: 30px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h4 {
+            margin-bottom: 20px;
+        }
+
+        .form-container .btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 offset-2">
+                <div class="form-container">
+                    <h4 class="alert alert-info">Update Student Information</h4>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" class="btn btn-success" value="Update">
+                        <a href="{% url 'home' %}" class="btn btn-info">Back to Home</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

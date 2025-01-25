@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .product-card {
+            margin: 15px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card h3 {
+            color: #333;
+            font-size: 1.25rem;
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .form-container {
+            padding: 30px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h3 {
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            border-radius: 4px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .product-list {
+            margin-top: 30px;
+        }
+
+        .col-md-8 {
+            margin-bottom: 30px;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        .btn-update {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .btn-update:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="my-4 text-center text-primary">Product List</h1>
+
+    <div class="row">
+        <!-- Form to Add Product (left side) -->
+        <div class="col-md-4">
+            <div class="form-container">
+                <h3>Add a Product</h3>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-success" value="Add Product">
+                </form>
+            </div>
+        </div>
+
+        <!-- Product List (right side) -->
+        <div class="col-md-8 product-list">
+            <div class="row">
+                {% for pro in prod %}
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <h3>{{ pro.name }}</h3>
+                        <p>{{ pro.desc }}</p>
+                        <p><strong>Price:</strong> ${{ pro.price }}</p>
+
+                        <!-- Update Button -->
+                        <form action="{% url 'updateproduct' pro.id %}" method="GET" class="mb-2">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-update">Update Product</button>
+                        </form>
+
+                        <!-- Delete Button -->
+                        <form action="{% url 'deletedata' pro.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-delete">Delete Product</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
